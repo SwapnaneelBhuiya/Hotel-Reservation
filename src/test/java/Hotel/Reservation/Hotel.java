@@ -52,5 +52,4 @@ public class Hotel {
 	public void setRew_weekend(int rew_weekend) {
 		this.rew_weekend = rew_weekend;
 	}
-
 }
