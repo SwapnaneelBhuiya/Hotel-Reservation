@@ -48,4 +48,9 @@ public class HotelResTest {
 	{
 		obj.find_cheapest_best_rated("14/03/2020","18/03/2020");
 	}
+	@Test
+	public void best_rated_hotel()
+	{
+		obj.find_best_rated_hotel("14/03/2020","18/03/2020");
+	}
 }

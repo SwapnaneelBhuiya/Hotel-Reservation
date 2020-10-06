@@ -120,7 +120,7 @@ public class HotelResMain {
 	    	cost_name.put(i.getHotel_name(), sum);
 	    }
 	    int min=Collections.min(cost_name.values());
-	    Entry<String,Integer> temp=null;String name_for_min_cost="";
+	    String name_for_min_cost="";
 	    int rating_for_min=0;
 	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
 	    {
@@ -169,6 +169,55 @@ public class HotelResMain {
 		    	}
 		    }	
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void find_best_rated_hotel(String start_date, String end_date) {
+		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
+		ArrayList<Hotel> ar=new ArrayList<Hotel>();
+		ArrayList<Integer> rating=new ArrayList<Integer>();
+		HashMap<String, Integer> cost_name=new HashMap<String,Integer>();
+		ar.add(obj1);ar.add(obj2);ar.add(obj3);
+		rating.add(obj1.getRating());rating.add(obj2.getRating());rating.add(obj3.getRating());
+		try {
+			d1=sdf.parse(start_date);
+			d2=sdf.parse(end_date);
+		c.setTime(d1);int sum=0;
+		long difference=Math.abs(d2.getTime()-d1.getTime());
+	    int diff = (int)TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+	    for(Hotel i:ar)
+	    {
+	    	sum=0;
+	    	for(int j=0;j<diff;j++)
+	    	{
+	    		int day_of_week=c.get(Calendar.DAY_OF_WEEK);
+	    		if(day_of_week==Calendar.SATURDAY||day_of_week==Calendar.SUNDAY)
+	    			sum+=i.getReg_weekend();
+	    		else
+	    			sum+=i.getReg_cost();
+    			c.add(Calendar.DATE, 1);
+	    	}
+	    	cost_name.put(i.getHotel_name(), sum);
+	    }
+	    int max_rating=Collections.max(rating);int var=0;
+	    for(Hotel i: ar)
+	    {
+	    	if(i.getRating()==(max_rating))
+	    	{
+	    		for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+			    {
+			    	if(i.getHotel_name().equals(entry.getKey()))
+			    	{
+			    		System.out.println(entry.getKey()+" total cost "+entry.getValue()+" Rating "+max_rating);var=1;
+			    		break;
+			    	}
+			    }	
+	    	}
+	    	if(var==1)
+	    		break;
+	    }
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
