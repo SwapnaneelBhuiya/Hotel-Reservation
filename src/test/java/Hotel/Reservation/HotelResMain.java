@@ -439,4 +439,3 @@ public class HotelResMain {
 		    }
 	}
 }
-	
