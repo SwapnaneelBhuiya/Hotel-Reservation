@@ -53,4 +53,11 @@ public class HotelResTest {
 	{
 		obj.find_best_rated_hotel("14/03/2020","18/03/2020");
 	}
+	@Test
+	public void add_special_rates()
+	{
+		obj1.setRew_cost(80);obj1.setRew_weekend(80);
+		obj2.setRew_cost(110);obj2.setRew_weekend(50);
+		obj3.setRew_cost(100);obj3.setRew_weekend(40);
+	}
 }
