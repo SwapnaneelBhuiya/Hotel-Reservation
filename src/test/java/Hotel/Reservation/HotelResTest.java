@@ -33,4 +33,9 @@ public class HotelResTest {
 		obj2.setReg_weekend(60);
 		obj3.setReg_cost(220);obj3.setReg_weekend(150);
 	}
+	@Test
+	public void find_cheapest_hotel_based_on_weekday_and_weekend()
+	{
+		obj.find_hotel_based_on_weekend_and_weekday("14/03/2020","18/03/2020");
+	}
 }
