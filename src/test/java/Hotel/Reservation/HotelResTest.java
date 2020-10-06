@@ -60,4 +60,9 @@ public class HotelResTest {
 		obj2.setRew_cost(110);obj2.setRew_weekend(50);
 		obj3.setRew_cost(100);obj3.setRew_weekend(40);
 	}
+	@Test
+	public void best_rated_cheap_hotel_reward_customer()
+	{
+		obj.find_best_rated_cheap_hotel_rewardcus("14/03/2020","18/03/2020");
+	}
 }

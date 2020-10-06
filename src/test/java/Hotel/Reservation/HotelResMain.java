@@ -221,5 +221,85 @@ public class HotelResMain {
 			e.printStackTrace();
 		}
 	}
+	public void find_best_rated_cheap_hotel_rewardcus(String start_date, String end_date) {
+		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
+		ArrayList<Hotel> ar=new ArrayList<Hotel>();
+		ArrayList<Integer> rating=new ArrayList<Integer>();
+		HashMap<String, Integer> cost_name=new HashMap<String,Integer>();
+		ar.add(obj1);ar.add(obj2);ar.add(obj3);
+		rating.add(obj1.getRating());rating.add(obj2.getRating());rating.add(obj3.getRating());
+		try {
+			d1=sdf.parse(start_date);
+			d2=sdf.parse(end_date);
+		c.setTime(d1);int sum=0;
+		long difference=Math.abs(d2.getTime()-d1.getTime());
+	    int diff = (int)TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+	    for(Hotel i:ar)
+	    {
+	    	sum=0;
+	    	for(int j=0;j<diff;j++)
+	    	{
+	    		int day_of_week=c.get(Calendar.DAY_OF_WEEK);
+	    		if(day_of_week==Calendar.SATURDAY||day_of_week==Calendar.SUNDAY)
+	    			sum+=i.getRew_weekend();
+	    		else
+	    			sum+=i.getRew_cost();
+    			c.add(Calendar.DATE, 1);
+	    	}
+	    	cost_name.put(i.getHotel_name(), sum);
+	    }
+	    int min=Collections.min(cost_name.values());
+	    String name_for_min_cost="";
+	    int rating_for_min=0;
+	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+	    {
+	    	if(min==entry.getValue())
+	    	{
+	    		name_for_min_cost=entry.getKey();
+	    		break;
+	    	}
+	    }	
+	    for(Hotel i:ar)
+	    {
+	    	if(i.getHotel_name().equals(name_for_min_cost))
+	    	{
+	    		rating_for_min=i.getRating();
+	    		break;
+	    	}
+	    }
+	    int var=0;
+	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+	    {
+	    	if(entry.getValue()-min<30)
+	    	{
+	    		for(Hotel i:ar)
+	    		{
+	    			if(i.getHotel_name().equals(entry.getKey()))
+	    			{
+	    				if(rating_for_min<i.getRating())
+	    				{
+	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    		    		break;
+	    				}
+	    			}
+	    					
+	    		}
+	    	}
+	    	if(var==1)
+	    		break;
+	    }
+	    if(var==0)
+	    	for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+		    {
+		    	if(min==entry.getValue())
+		    	{
+		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		break;
+		    	}
+		    }	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 	
