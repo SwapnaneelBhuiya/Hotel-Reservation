@@ -38,4 +38,9 @@ public class HotelResTest {
 	{
 		obj.find_hotel_based_on_weekend_and_weekday("14/03/2020","18/03/2020");
 	}
+	@Test
+	public void add_ratings()
+	{
+		obj1.setRating(3);obj2.setRating(4);obj3.setRating(5);
+	}
 }
