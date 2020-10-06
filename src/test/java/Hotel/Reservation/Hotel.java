@@ -7,6 +7,10 @@ public class Hotel {
 	private int reg_weekend;
 	private int rew_cost;
 	private int rew_weekend;
+	public Hotel(String name)
+	{
+		hotel_name=name;
+	}
 	public Hotel(String ar, int a, int b, int c, int d, int e)
 	{
 		hotel_name=ar;
