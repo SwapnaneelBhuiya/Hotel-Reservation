@@ -70,4 +70,9 @@ public class HotelResTest {
 	{
 		obj.reward_hotel_stream("14/03/2020","18/03/2020");
 	}
+	@Test
+	public void best_rated_cheap_hotel_regular_usingstream()
+	{
+		obj.reward_hotel_stream_regular("14/03/2020","18/03/2020");
+	}
 }

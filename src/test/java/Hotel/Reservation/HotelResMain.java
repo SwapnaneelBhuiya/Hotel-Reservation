@@ -20,6 +20,8 @@ public class HotelResMain {
 	public static void main(String args[])
 	{
 		System.out.println("Welcome to Hotel Reservation Program");
+		Scanner sc=new Scanner(System.in);
+		HotelResTest ob=new HotelResTest();
 	}
 	public void find_hotel_without_weekend(String start_date, String end_date) {
 		//DayOfWeek day=date.getDayOfWeek();
@@ -365,6 +367,76 @@ public class HotelResMain {
 		    	}
 		    }
 	    
+	}
+	public void reward_hotel_stream_regular(String start_date, String end_date) {
+		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
+		ArrayList<Hotel> ar=new ArrayList<Hotel>();
+		ArrayList<Integer> rating=new ArrayList<Integer>();
+		HashMap<String, Integer> cost_name=new HashMap<String,Integer>();
+		ar.add(obj1);ar.add(obj2);ar.add(obj3);
+		rating.add(obj1.getRating());rating.add(obj2.getRating());rating.add(obj3.getRating());
+		try {
+			d1=sdf.parse(start_date);
+			d2=sdf.parse(end_date);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		c.setTime(d1);
+		long difference=Math.abs(d2.getTime()-d1.getTime());
+	    int diff = (int)TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);int sum=0;
+	    for(Hotel i:ar)
+	    {
+	    	sum=0;
+	    	for(int j=0;j<diff;j++)
+	    	{
+	    		int day_of_week=c.get(Calendar.DAY_OF_WEEK);
+	    		if(day_of_week==Calendar.SATURDAY||day_of_week==Calendar.SUNDAY)
+	    			sum+=i.getReg_weekend();
+	    		else
+	    			sum+=i.getReg_cost();
+    			c.add(Calendar.DATE, 1);
+	    	}
+	    	cost_name.put(i.getHotel_name(), sum);
+	    }
+		int min=Collections.min(cost_name.values());
+	    int rating_for_min=0;
+	    final String name_for_min_cost=cost_name.entrySet().stream().filter(e -> e.getValue()==min).findFirst().map(e->e.getKey()).orElse("");
+	    rating_for_min=ar.stream().filter(e-> e.getHotel_name().equals(name_for_min_cost)).findFirst().map(e->e.getRating()).orElse(0);
+//	    cost_name.entrySet().stream().filter(e-> e.getValue()-min<30).flatMap(e->((Optional<Entry<String, Integer>>) ar.stream()
+//	    		.filter(h->h.getHotel_name().equals(e.getKey())&&rating_for_min<h.getRating())
+//	    				.peek(h->System.out.println(e.getKey()+" "+min))).orElse(h->System.out.println(e.getKey()+" Rating "+rating_for_min+" "+min)));
+	    int var=0;
+	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+	    {
+	    	if(entry.getValue()-min<30)
+	    	{
+	    		for(Hotel i:ar)
+	    		{
+	    			if(i.getHotel_name().equals(entry.getKey()))
+	    			{
+	    				if(rating_for_min<i.getRating())
+	    				{
+	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    		    		break;
+	    				}
+	    			}
+	    					
+	    		}
+	    	}
+	    	if(var==1)
+	    		break;
+	    }
+	    if(var==0)
+	    	for(Map.Entry<String,Integer> entry:cost_name.entrySet())
+		    {
+		    	if(min==entry.getValue())
+		    	{
+		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		break;
+		    	}
+		    }
 	}
 }
 	
