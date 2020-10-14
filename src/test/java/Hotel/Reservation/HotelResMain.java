@@ -12,9 +12,6 @@ import java.util.stream.Collectors;
 
 public class HotelResMain {
 	
-	public static Hotel obj1=new Hotel("Lakewood",3,110,90,80,80);
-	public static Hotel obj2=new Hotel("Bridgewood",4,160,60,110,50);
-	public static Hotel obj3=new Hotel("Ridgewood",5,220,150,100,40);
 	public static SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 	public static DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM,yyyy");
 	public static void main(String args[])
@@ -23,7 +20,7 @@ public class HotelResMain {
 		Scanner sc=new Scanner(System.in);
 		HotelResTest ob=new HotelResTest();
 	}
-	public void find_hotel_without_weekend(String start_date, String end_date) {
+	public void find_hotel_without_weekend(Hotel obj1, Hotel obj2, Hotel obj3, String start_date, String end_date) {
 		//DayOfWeek day=date.getDayOfWeek();
 		//DayOfWeek day1=date1.getDayOfWeek();
 		Date d1=null; Date d2=null;
@@ -50,7 +47,7 @@ public class HotelResMain {
 	    		System.out.println(obj3.getHotel_name()+" "+obj3.getReg_cost()*diff);
 	    }
 	}
-	public void find_hotel_based_on_weekend_and_weekday(String start_date, String end_date) {
+	public void find_hotel_based_on_weekend_and_weekday(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		HashMap<String, Integer> cost_name=new HashMap<String,Integer>();
@@ -80,7 +77,7 @@ public class HotelResMain {
 	    {
 	    	if(min==entry.getValue())
 	    	{
-	    		System.out.println(entry.getKey()+" "+min);
+	    		System.out.println("Cheapest hotel based on weekend and weekday rates"+entry.getKey()+" "+min);
 	    		break;
 	    	}
 	    }	
@@ -88,7 +85,7 @@ public class HotelResMain {
 			e.printStackTrace();
 		}
 	}
-	public void find_cheapest_best_rated(String start_date, String end_date) {
+	public void find_cheapest_best_rated(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		ArrayList<Integer> rating=new ArrayList<Integer>();
@@ -145,7 +142,7 @@ public class HotelResMain {
 	    			{
 	    				if(rating_for_min<i.getRating())
 	    				{
-	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    					System.out.println("Best rated cheapest hotel for regular customer" +entry.getKey()+" "+min);var=1;
 	    		    		break;
 	    				}
 	    			}
@@ -160,7 +157,7 @@ public class HotelResMain {
 		    {
 		    	if(min==entry.getValue())
 		    	{
-		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		System.out.println("Best rated cheapest hotel for regular customer" +entry.getKey()+" "+min+" Rating "+rating_for_min);
 		    		break;
 		    	}
 		    }	
@@ -168,7 +165,7 @@ public class HotelResMain {
 			e.printStackTrace();
 		}
 	}
-	public void find_best_rated_hotel(String start_date, String end_date) {
+	public void find_best_rated_hotel(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		ArrayList<Integer> rating=new ArrayList<Integer>();
@@ -204,7 +201,7 @@ public class HotelResMain {
 			    {
 			    	if(i.getHotel_name().equals(entry.getKey()))
 			    	{
-			    		System.out.println(entry.getKey()+" total cost "+entry.getValue()+" Rating "+max_rating);var=1;
+			    		System.out.println("Best rated hotel"+entry.getKey()+" total cost "+entry.getValue()+" Rating "+max_rating);var=1;
 			    		break;
 			    	}
 			    }	
@@ -217,7 +214,7 @@ public class HotelResMain {
 			e.printStackTrace();
 		}
 	}
-	public void find_best_rated_cheap_hotel_rewardcus(String start_date, String end_date) {
+	public void find_best_rated_cheap_hotel_rewardcus(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		ArrayList<Integer> rating=new ArrayList<Integer>();
@@ -274,7 +271,7 @@ public class HotelResMain {
 	    			{
 	    				if(rating_for_min<i.getRating())
 	    				{
-	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    					System.out.println("Best rated cheapest hotel for reward customer" +entry.getKey()+" "+min);var=1;
 	    		    		break;
 	    				}
 	    			}
@@ -289,7 +286,7 @@ public class HotelResMain {
 		    {
 		    	if(min==entry.getValue())
 		    	{
-		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		System.out.println("Best rated cheapest hotel for reward customer" +entry.getKey()+" "+min+" Rating "+rating_for_min);
 		    		break;
 		    	}
 		    }	
@@ -297,7 +294,7 @@ public class HotelResMain {
 			e.printStackTrace();
 		}
 	}
-	public void reward_hotel_stream(String start_date, String end_date) {
+	public void reward_hotel_stream(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		ArrayList<Integer> rating=new ArrayList<Integer>();
@@ -333,9 +330,6 @@ public class HotelResMain {
 	    int rating_for_min=0;
 	    final String name_for_min_cost=cost_name.entrySet().stream().filter(e -> e.getValue()==min).findFirst().map(e->e.getKey()).orElse("");
 	    rating_for_min=ar.stream().filter(e-> e.getHotel_name().equals(name_for_min_cost)).findFirst().map(e->e.getRating()).orElse(0);
-//	    cost_name.entrySet().stream().filter(e-> e.getValue()-min<30).flatMap(e->((Optional<Entry<String, Integer>>) ar.stream()
-//	    		.filter(h->h.getHotel_name().equals(e.getKey())&&rating_for_min<h.getRating())
-//	    				.peek(h->System.out.println(e.getKey()+" "+min))).orElse(h->System.out.println(e.getKey()+" Rating "+rating_for_min+" "+min)));
 	    int var=0;
 	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
 	    {
@@ -347,7 +341,7 @@ public class HotelResMain {
 	    			{
 	    				if(rating_for_min<i.getRating())
 	    				{
-	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    					System.out.println("Reward customer regular rate stream:" +entry.getKey()+" "+min);var=1;
 	    		    		break;
 	    				}
 	    			}
@@ -362,13 +356,13 @@ public class HotelResMain {
 		    {
 		    	if(min==entry.getValue())
 		    	{
-		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		System.out.println("Reward customer regular rate stream:" +entry.getKey()+" "+min+" Rating "+rating_for_min);
 		    		break;
 		    	}
 		    }
 	    
 	}
-	public void reward_hotel_stream_regular(String start_date, String end_date) {
+	public void reward_hotel_stream_regular(Hotel obj1, Hotel obj2, Hotel obj3,String start_date, String end_date) {
 		Calendar c = Calendar.getInstance();Date d1=null,d2=null;
 		ArrayList<Hotel> ar=new ArrayList<Hotel>();
 		ArrayList<Integer> rating=new ArrayList<Integer>();
@@ -404,9 +398,6 @@ public class HotelResMain {
 	    int rating_for_min=0;
 	    final String name_for_min_cost=cost_name.entrySet().stream().filter(e -> e.getValue()==min).findFirst().map(e->e.getKey()).orElse("");
 	    rating_for_min=ar.stream().filter(e-> e.getHotel_name().equals(name_for_min_cost)).findFirst().map(e->e.getRating()).orElse(0);
-//	    cost_name.entrySet().stream().filter(e-> e.getValue()-min<30).flatMap(e->((Optional<Entry<String, Integer>>) ar.stream()
-//	    		.filter(h->h.getHotel_name().equals(e.getKey())&&rating_for_min<h.getRating())
-//	    				.peek(h->System.out.println(e.getKey()+" "+min))).orElse(h->System.out.println(e.getKey()+" Rating "+rating_for_min+" "+min)));
 	    int var=0;
 	    for(Map.Entry<String,Integer> entry:cost_name.entrySet())
 	    {
@@ -418,7 +409,7 @@ public class HotelResMain {
 	    			{
 	    				if(rating_for_min<i.getRating())
 	    				{
-	    					System.out.println(entry.getKey()+" "+min);var=1;
+	    					System.out.println("Regular customer Stream:" +entry.getKey()+" "+min);var=1;
 	    		    		break;
 	    				}
 	    			}
@@ -433,7 +424,7 @@ public class HotelResMain {
 		    {
 		    	if(min==entry.getValue())
 		    	{
-		    		System.out.println(entry.getKey()+" "+min+" Rating "+rating_for_min);
+		    		System.out.println("Regular customer Stream:" +entry.getKey()+" "+min+" Rating "+rating_for_min);
 		    		break;
 		    	}
 		    }
